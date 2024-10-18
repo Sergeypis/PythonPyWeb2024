@@ -75,8 +75,14 @@
 <br>
 <h2> Вопрос 7. Какой автор имеет наибольший возраст?<h2>
 {% if answer7 %}
-    Возраст автора: <span style="color: red">{{ answer7 }}</span>
-
+    {% for answer in answer7 %}
+    <ul>
+    <li>
+    Имя автора: <span style="color: red">{{ answer.username }}</span>
+    Возраст автора: <span style="color: red">{{ answer.age }}</span>
+    </li>
+    </ul>
+    {% endfor %}
 {% else %}
     <p style="color: #1c7430; margin-left: 30px">Пока нет ответа</p>
 {% endif %}
