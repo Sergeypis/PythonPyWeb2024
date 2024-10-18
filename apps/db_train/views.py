@@ -7,7 +7,7 @@ from django.db import connection, reset_queries
 
 def print_queries(*, todo: int):
     print(f"{todo}. ", "Число запросов = ", len(connection.queries), " Запросы = ", connection.queries)
-    reset_queries(todo=1)
+    reset_queries()
 
 
 class TrainView(View):
