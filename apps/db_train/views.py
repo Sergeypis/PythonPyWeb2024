@@ -45,10 +45,17 @@ class TrainView(View):
         self.answer7 = Author.objects.filter(age=max_age['max_age'])
         print_queries(todo=7)
 
+        # TODO 8. Сколько авторов указали свой номер телефона?
+        self.answer8 = Author.objects.filter(phone_number__isnull=False).count()
+        print_queries(todo=8)
 
-        self.answer8 = None  # TODO 8. Сколько авторов указали свой номер телефона?
-        self.answer9 = None  # TODO 9. Какие авторы имеют возраст младше 25 лет?
-        self.answer10 = None  # TODO 10. Сколько статей написано каждым автором?
+        # TODO 9. Какие авторы имеют возраст младше 25 лет?
+        self.answer9 = Author.objects.filter(age__lt=25)
+        print_queries(todo=9)
+
+        # TODO 10. Сколько статей написано каждым автором?
+        self.answer10 = Author.objects.annotate(count=Count('entries')).values('username', 'count')
+        print_queries(todo=10)
 
         context = {f'answer{index}': self.__dict__[f'answer{index}'] for index in range(1, 11)}
         return render(request, 'train_db/training_db.html', context=context)
