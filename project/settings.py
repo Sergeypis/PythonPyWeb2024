@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap4",
     'debug_toolbar',
+    'apps.devdb2024',
 ]
 
 
@@ -101,6 +102,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'devdb': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'DevDB2024',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     },
 }
 

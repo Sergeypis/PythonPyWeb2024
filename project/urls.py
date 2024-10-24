@@ -24,6 +24,7 @@ urlpatterns = [
     path('train/', include('apps.db_train.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('api_alter/', include('apps.db_train_alternative.urls')),
+    path('api_alter/', include('apps.devdb2024.urls')),
 ]
 
 if settings.DEBUG:
