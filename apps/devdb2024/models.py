@@ -26,7 +26,8 @@ class Route(models.Model):
     distance = models.PositiveSmallIntegerField()
     trip_time = models.CharField(
         max_length=30,
-        validators=[regex_trip_time_field])
+        validators=[regex_trip_time_field]
+    )
     active = models.BooleanField(default=True)
 
     class Meta:
