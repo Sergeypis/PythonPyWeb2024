@@ -110,9 +110,11 @@ DATABASES = {
         'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'OPTIONS': {'options': '-c search_path="Operations","Clients","Cars",Public'},
     },
 }
 
+DATABASE_ROUTERS = ('apps.devdb2024.dbrouters.MyDBRouter',)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

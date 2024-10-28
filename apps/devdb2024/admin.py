@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from . models import Route, Driver, VehicleType, Vehicle, Passenger, Schedule, Ticket
+from apps.devdb2024.models import Route, Driver, VehicleType, Vehicle, Passenger, Schedule, Ticket
 
 # admin.site.register([Route, Driver, VehicleType, Vehicle, Passenger, Schedule, Ticket])
 class MultiDBModelAdmin(admin.ModelAdmin):

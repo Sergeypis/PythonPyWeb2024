@@ -34,6 +34,11 @@ class Route(models.Model):
         managed = True
         db_table = 'Route'
         unique_together = (('depart', 'arrive', 'distance'),)
+        verbose_name = "Маршрут"
+        verbose_name_plural = "Маршруты"
+
+    def __str__(self):
+        return f"Маршрут: {self.depart} - {self.arrive}, {self.distance} км"
 
 
 class Driver(models.Model):
@@ -52,6 +57,11 @@ class Driver(models.Model):
         managed = True
         db_table = 'Driver'
         unique_together = (('lastname', 'firstname', 'passport', 'birthday'),)
+        verbose_name = "Водитель"
+        verbose_name_plural = "Водители"
+
+    def __str__(self):
+        return f"Водитель: {self.firstname} {self.lastname}, категории ВУ - {self.drivers_license_category}"
 
 
 class VehicleType(models.Model):
@@ -61,6 +71,10 @@ class VehicleType(models.Model):
     class Meta:
         managed = True
         db_table = 'Vehicle_type'
+        verbose_name_plural = "Тип ТС"
+
+    def __str__(self):
+        return f"{self.type}"
 
 
 class Vehicle(models.Model):
@@ -85,6 +99,11 @@ class Vehicle(models.Model):
         managed = True
         db_table = 'Vehicle'
         unique_together = (('model', 'number_plate', 'year_of_manufacture'),)
+        verbose_name = "Транспортное средство"
+        verbose_name_plural = "Транспортные средства"
+
+    def __str__(self):
+        return f"{self.model}, {self.number_plate}"
 
 
 class Passenger(models.Model):
@@ -99,23 +118,34 @@ class Passenger(models.Model):
         managed = True
         db_table = 'Passenger'
         unique_together = (('lastname', 'firstname', 'passport', 'birthday'),)
+        verbose_name = "Пассажир"
+        verbose_name_plural = "Пассажиры"
+
+    def __str__(self):
+        initials = None  # Инициалы
+        if self.firstname and self.patronymic:
+            initials = f"{self.firstname.upper()[0]}.{self.patronymic.upper()[0]}."
+        return f"{self.lastname} {initials}"
 
 
 class Schedule(models.Model):
     schedule_id = models.AutoField(primary_key=True)
     route_id = models.ForeignKey(
         to=Route,
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
+        db_column="route_id"
     )
     vin = models.ForeignKey(
         to=Vehicle,
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
+        db_column="vin"
     )
     date_depart = models.DateField()
     time_depart = models.TimeField()
     driver_id = models.ForeignKey(
         to=Driver,
         on_delete=models.SET_NULL,
+        db_column="driver_id",
         null=True)
     tickets_avaliable = models.IntegerField()
 
@@ -123,13 +153,19 @@ class Schedule(models.Model):
         managed = True
         db_table = 'Schedule'
         unique_together = (('vin', 'date_depart', 'time_depart'),)
+        verbose_name = "Рейс"
+        verbose_name_plural = "Рейсы"
+
+    def __str__(self):
+        return f"Рейс {self.route_id.depart} - {self.route_id.arrive}, отправление {self.date_depart} {self.time_depart}"
 
 
 class Ticket(models.Model):
     ticked_id = models.AutoField(primary_key=True)
     schedule_id = models.ForeignKey(
         to=Schedule,
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
+        db_column="schedule_id"
     )
     pass_field = models.ForeignKey(
         to=Passenger,
@@ -147,3 +183,8 @@ class Ticket(models.Model):
         managed = True
         db_table = 'Ticket'
         unique_together = (('schedule_id', 'pass_field'),)
+        verbose_name = "Билет"
+        verbose_name_plural = "Билеты"
+
+    def __str__(self):
+        return f"Билет {self.schedule_id.route_id.depart} - {self.schedule_id.route_id.arrive}, на {self.schedule_id.date_depart} место {self.place_number}"
