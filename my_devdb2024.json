@@ -1,0 +1,431 @@
+[
+{
+    "model": "devdb2024.route",
+    "pk": 4,
+    "fields": {
+        "depart": "Москва",
+        "arrive": "Воронеж",
+        "distance": 543,
+        "trip_time": "08:20",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 5,
+    "fields": {
+        "depart": "Воронеж",
+        "arrive": "Москва",
+        "distance": 543,
+        "trip_time": "08:40",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 6,
+    "fields": {
+        "depart": "Москва",
+        "arrive": "Мурманск",
+        "distance": 1513,
+        "trip_time": "1 day 12:58",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 7,
+    "fields": {
+        "depart": "Москва",
+        "arrive": "Пермь",
+        "distance": 1154,
+        "trip_time": "1 day 3:35",
+        "active": false
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 9,
+    "fields": {
+        "depart": "MSK",
+        "arrive": "SPb",
+        "distance": 860,
+        "trip_time": "10:00",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 10,
+    "fields": {
+        "depart": "Viborg",
+        "arrive": "Saint-Petersburg",
+        "distance": 120,
+        "trip_time": "01:30",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 14,
+    "fields": {
+        "depart": "Saint-Petersburg",
+        "arrive": "Viborg",
+        "distance": 120,
+        "trip_time": "01:40",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.driver",
+    "pk": 3,
+    "fields": {
+        "lastname": "Иванов",
+        "firstname": "Иван",
+        "patronymic": null,
+        "passport": "50 02 789654",
+        "birthday": "1978-12-03",
+        "date_of_employment": "2020-05-10",
+        "drivers_license": "12 34 000001",
+        "drivers_license_category": "C, CE, D",
+        "date_of_issue_license": "1990-06-06"
+    }
+},
+{
+    "model": "devdb2024.driver",
+    "pk": 6,
+    "fields": {
+        "lastname": "Петров",
+        "firstname": "Пётр",
+        "patronymic": "Петрович",
+        "passport": "10 01 987654",
+        "birthday": "1978-12-03",
+        "date_of_employment": "2020-05-10",
+        "drivers_license": "55 55 777777",
+        "drivers_license_category": "B, D, DE",
+        "date_of_issue_license": "2005-10-16"
+    }
+},
+{
+    "model": "devdb2024.driver",
+    "pk": 7,
+    "fields": {
+        "lastname": "Сидоров",
+        "firstname": "Сидр",
+        "patronymic": "Сидорович",
+        "passport": "40 05 200105",
+        "birthday": "1982-05-02",
+        "date_of_employment": "2023-01-10",
+        "drivers_license": "45 45 455455",
+        "drivers_license_category": "D",
+        "date_of_issue_license": "2022-02-02"
+    }
+},
+{
+    "model": "devdb2024.vehicletype",
+    "pk": "not set",
+    "fields": {
+        "max_allowed_speed": 70
+    }
+},
+{
+    "model": "devdb2024.vehicletype",
+    "pk": "Автобус большой",
+    "fields": {
+        "max_allowed_speed": 90
+    }
+},
+{
+    "model": "devdb2024.vehicletype",
+    "pk": "Автобус малый",
+    "fields": {
+        "max_allowed_speed": 60
+    }
+},
+{
+    "model": "devdb2024.vehicletype",
+    "pk": "Автобус средний",
+    "fields": {
+        "max_allowed_speed": 70
+    }
+},
+{
+    "model": "devdb2024.vehicletype",
+    "pk": "Легковой фургон",
+    "fields": {
+        "max_allowed_speed": 90
+    }
+},
+{
+    "model": "devdb2024.vehicle",
+    "pk": "ABCDE1234567890AS",
+    "fields": {
+        "model": "Tranzit",
+        "number_plate": "В123ВВ750RUS",
+        "year_of_manufacture": 2015,
+        "number_of_seats": 8,
+        "type": "not set",
+        "fuel_type": "",
+        "resource": 15,
+        "mileage": 45000,
+        "decommissioned": false
+    }
+},
+{
+    "model": "devdb2024.vehicle",
+    "pk": "ABCDE1234567890ER",
+    "fields": {
+        "model": "Higer A80",
+        "number_plate": "МЕ789198RUS",
+        "year_of_manufacture": 2002,
+        "number_of_seats": 20,
+        "type": "Автобус малый",
+        "fuel_type": "АИ-92",
+        "resource": 19,
+        "mileage": 500000,
+        "decommissioned": false
+    }
+},
+{
+    "model": "devdb2024.vehicle",
+    "pk": "ABCDE1234567890FG",
+    "fields": {
+        "model": "Touring",
+        "number_plate": "ВХ555198RUS",
+        "year_of_manufacture": 2010,
+        "number_of_seats": 62,
+        "type": "Автобус большой",
+        "fuel_type": "Disel",
+        "resource": 19,
+        "mileage": 357000,
+        "decommissioned": false
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 0,
+    "fields": {
+        "lastname": "no_name",
+        "firstname": "no_name",
+        "patronymic": null,
+        "passport": "00 00 000000",
+        "birthday": "1234-12-21"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 1,
+    "fields": {
+        "lastname": "Захаров",
+        "firstname": "Захар",
+        "patronymic": "Захарович",
+        "passport": "55 66 777888",
+        "birthday": "2010-02-03"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 2,
+    "fields": {
+        "lastname": "Smith",
+        "firstname": "John",
+        "patronymic": "",
+        "passport": "00 20 200200",
+        "birthday": "2000-08-30"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 3,
+    "fields": {
+        "lastname": "Прохоров",
+        "firstname": "Валерий",
+        "patronymic": "Сергеевич",
+        "passport": "66 66 777888",
+        "birthday": "1983-04-03"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 4,
+    "fields": {
+        "lastname": "Бойко",
+        "firstname": "Алексей",
+        "patronymic": "Валерьевич",
+        "passport": "33 44 567987",
+        "birthday": "1985-07-10"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 5,
+    "fields": {
+        "lastname": "Хиврич",
+        "firstname": "Денис",
+        "patronymic": "Валерьевич",
+        "passport": "45 43 123456",
+        "birthday": "1982-08-13"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 6,
+    "fields": {
+        "lastname": "Безруков",
+        "firstname": "Евгений",
+        "patronymic": "Игоревич",
+        "passport": "76 41 111987",
+        "birthday": "1982-07-15"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 7,
+    "fields": {
+        "lastname": "Иванова",
+        "firstname": "Елена",
+        "patronymic": "Владимировна",
+        "passport": "12 43 922716",
+        "birthday": "1986-11-23"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 8,
+    "fields": {
+        "lastname": "Воротыло",
+        "firstname": "Александр",
+        "patronymic": "Григорьевич",
+        "passport": "41 07 656243",
+        "birthday": "1959-08-03"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 9,
+    "fields": {
+        "lastname": "Шубин",
+        "firstname": "Андрей",
+        "patronymic": "Владимирович",
+        "passport": "40 07 097856",
+        "birthday": "1981-12-27"
+    }
+},
+{
+    "model": "devdb2024.passenger",
+    "pk": 10,
+    "fields": {
+        "lastname": "Глинина",
+        "firstname": "Ирина",
+        "patronymic": "Андреевна",
+        "passport": "45 02 450888",
+        "birthday": "1975-02-18"
+    }
+},
+{
+    "model": "devdb2024.schedule",
+    "pk": 3,
+    "fields": {
+        "route_id": 4,
+        "vin": "ABCDE1234567890AS",
+        "date_depart": "2024-10-15",
+        "time_depart": "16:30:00",
+        "driver_id": 6,
+        "tickets_avaliable": 8
+    }
+},
+{
+    "model": "devdb2024.schedule",
+    "pk": 4,
+    "fields": {
+        "route_id": 7,
+        "vin": "ABCDE1234567890FG",
+        "date_depart": "2024-10-11",
+        "time_depart": "09:00:00",
+        "driver_id": 3,
+        "tickets_avaliable": 62
+    }
+},
+{
+    "model": "devdb2024.schedule",
+    "pk": 5,
+    "fields": {
+        "route_id": 7,
+        "vin": "ABCDE1234567890ER",
+        "date_depart": "2024-10-11",
+        "time_depart": "09:00:00",
+        "driver_id": 7,
+        "tickets_avaliable": 20
+    }
+},
+{
+    "model": "devdb2024.ticket",
+    "pk": 1,
+    "fields": {
+        "schedule_id": 3,
+        "pass_field": 1,
+        "cost": "6 500,00 ?",
+        "place_number": 8
+    }
+},
+{
+    "model": "devdb2024.ticket",
+    "pk": 2,
+    "fields": {
+        "schedule_id": 4,
+        "pass_field": 1,
+        "cost": "6 800,00 ?",
+        "place_number": 1
+    }
+},
+{
+    "model": "devdb2024.ticket",
+    "pk": 3,
+    "fields": {
+        "schedule_id": 4,
+        "pass_field": 4,
+        "cost": "6 800,00 ?",
+        "place_number": 5
+    }
+},
+{
+    "model": "devdb2024.ticket",
+    "pk": 4,
+    "fields": {
+        "schedule_id": 4,
+        "pass_field": 7,
+        "cost": "6 800,00 ?",
+        "place_number": 4
+    }
+},
+{
+    "model": "devdb2024.ticket",
+    "pk": 5,
+    "fields": {
+        "schedule_id": 5,
+        "pass_field": 7,
+        "cost": "9 850,00 ?",
+        "place_number": 19
+    }
+},
+{
+    "model": "devdb2024.ticket",
+    "pk": 6,
+    "fields": {
+        "schedule_id": 5,
+        "pass_field": 9,
+        "cost": "9 850,00 ?",
+        "place_number": 10
+    }
+},
+{
+    "model": "devdb2024.ticket",
+    "pk": 7,
+    "fields": {
+        "schedule_id": 5,
+        "pass_field": 8,
+        "cost": "9 850,00 ?",
+        "place_number": 11
+    }
+}
+]

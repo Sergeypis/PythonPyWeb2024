@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
     'debug_toolbar',
     'apps.devdb2024',
+    'rest_framework',
 ]
 
 
