@@ -31,3 +31,5 @@ class RouteModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Route
         fields = ['depart']  # или можно прописать '__all__' если нужны все поля
+
+

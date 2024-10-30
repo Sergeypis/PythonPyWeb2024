@@ -1,6 +1,6 @@
 import os
 import time
-
+import json
 import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
@@ -32,10 +32,14 @@ if __name__ == "__main__":
             return instance
 
 
+    dd = Author(**{'name': 'John', 'email': 'john5'})
+    dd.clean_fields()
+    dd.save()
+    # dd=Author.objects.create(**{'name': 'John', 'email': 'john4'})
+
     # Десериализация (Json объект (словарь) трансформируется в Модель и сохраняется в БД)
 
-    json_data = {'name': 'John', 'email': 'john@example.com'}
-
+    json_data = json.dumps({'id': 10, 'name': 'John', 'email': 'john@example.com'})
     serializer = AuthorSerializer(data=json_data)
     # Проверка валидности данных
     if serializer.is_valid():
@@ -47,3 +51,4 @@ if __name__ == "__main__":
     else:
         # Вывод информации об ошибках валидации
         print(serializer.errors)
+
