@@ -15,6 +15,8 @@ from .serializers import AuthorModelSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 class AuthorAPIView(APIView):
@@ -115,6 +117,11 @@ class AuthorViewSet(ModelViewSet):
     serializer_class = AuthorModelSerializer
     http_method_names = ['get', 'post']  # Ограничение методов представления
     pagination_class = AuthorPagination
+
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['name', 'email']  # Указываем для каких полем можем проводить фильтрацию
+    search_fields = ['email']  # Поля, по которым будет выполняться поиск
+    ordering_fields = ['name', 'email']  # Поля, по которым можно сортировать
 
     # Переопределение метода get_queryset() для фильтрации по query_params
     def get_queryset(self):

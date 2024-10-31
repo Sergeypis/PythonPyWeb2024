@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'apps.devdb2024',
     'rest_framework',
+    'django_filters',
 ]
 
 
