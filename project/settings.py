@@ -116,7 +116,8 @@ DATABASES = {
     },
 }
 
-DATABASE_ROUTERS = ('apps.devdb2024.dbrouters.MyDBRouter',)
+DATABASE_ROUTERS = ['apps.devdb2024.dbrouters.AuthRouter', 'apps.devdb2024.dbrouters.MyDBRouter',]
+# DATABASE_MAPPING = {'devdb2024': 'devdb',}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

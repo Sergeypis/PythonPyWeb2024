@@ -115,7 +115,7 @@ class AuthorPagination(PageNumberPagination):
 class AuthorViewSet(ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
-    http_method_names = ['get', 'post']  # Ограничение методов представления
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete']  # Ограничение методов представления
     pagination_class = AuthorPagination
 
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
