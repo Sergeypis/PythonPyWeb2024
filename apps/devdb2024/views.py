@@ -1,8 +1,15 @@
 # from Tools.scripts.patchcheck import status
+from functools import partial
+from venv import create
+
+from django.db.migrations import CreateModel
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, ListModelMixin, \
+    DestroyModelMixin
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.views import View
 from .serializers import RouteSerializer, RouteModelSerializer
 
@@ -22,7 +29,7 @@ class DevDBRouteREST(View):
 
         if id is None:  # Проверяем, что требуется вернуть всех пользователей
             data = []
-            for route in Route.objects.all().using("devdb"):
+            for route in Route.objects.all():
                 data_route = {'id': route.route_id,
                     'depart': route.depart,
                     'arrive': route.arrive,
@@ -30,7 +37,7 @@ class DevDBRouteREST(View):
             data.append(data_route)
 
         else:
-            if route := Route.objects.using("devdb").get(route_id=id):
+            if route := Route.objects.get(route_id=id):  # Нужен обработчик исключений!!!
                 data = {'id': route.route_id,
                     'depart': route.depart,
                     'arrive': route.arrive,
@@ -225,3 +232,43 @@ class RouteAPIView(APIView):
 
         route.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class RouteGenericAPIView(GenericAPIView, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, ListModelMixin, DestroyModelMixin):
+    queryset = Route.objects.all()
+    serializer_class = RouteModelSerializer
+
+    def get(self, request, *args, **kwargs):
+        if kwargs.get(self.lookup_field):
+            try:
+                return self.retrieve(request, *args, **kwargs)
+            except Http404:
+                return Response({"message": "Object not found"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        try:
+            return self.update(request, *args, **kwargs)
+        except Http404:
+            return Response({"message": "Object not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    def patch(self, request, *args, **kwargs):
+        try:
+            return self.partial_update(request, *args, **kwargs)
+        except Http404:
+            return Response({"message": "Object not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response({"message": "The object has been deleted"}, status=status.HTTP_204_NO_CONTENT)
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            return self.destroy(request, *args, **kwargs)
+        except Http404:
+            return Response({"message": "Object not found"}, status=status.HTTP_404_NOT_FOUND)
