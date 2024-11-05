@@ -3,14 +3,20 @@ from functools import partial
 from venv import create
 
 from django.db.migrations import CreateModel
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from rest_framework.decorators import action
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, ListModelMixin, \
     DestroyModelMixin
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse, Http404
 from django.views import View
+from rest_framework.viewsets import ViewSet, ModelViewSet
+
 from .serializers import RouteSerializer, RouteModelSerializer
 
 from django.views.decorators.csrf import csrf_exempt
@@ -174,7 +180,6 @@ class DevDBRouteREST(View):
                                 json_dumps_params={"ensure_ascii": False,
                                                    "indent": 4})
 
-
 class RouteAPIView(APIView):
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
@@ -233,7 +238,6 @@ class RouteAPIView(APIView):
         route.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 class RouteGenericAPIView(GenericAPIView, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, ListModelMixin, DestroyModelMixin):
     queryset = Route.objects.all()
     serializer_class = RouteModelSerializer
@@ -272,3 +276,34 @@ class RouteGenericAPIView(GenericAPIView, CreateModelMixin, RetrieveModelMixin, 
             return self.destroy(request, *args, **kwargs)
         except Http404:
             return Response({"message": "Object not found"}, status=status.HTTP_404_NOT_FOUND)
+
+class RoutePagination(PageNumberPagination):
+    page_size = 5  # количество объектов на странице
+    page_size_query_param = 'page_size'  # параметр запроса для настройки количества объектов на странице
+    max_page_size = 1000  # максимальное количество объектов на странице
+
+class RouteViewSet(ModelViewSet):
+    queryset = Route.objects.all()
+    serializer_class = RouteModelSerializer
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete']  # Ограничение методов представления(по умолчанию все активны)
+    pagination_class = RoutePagination
+
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['depart', 'arrive']  # Указываем для каких полем можем проводить фильтрацию
+    search_fields = ['depart', 'arrive']  # Поля, по которым будет выполняться поиск
+    ordering_fields = ['trip_time']  # Поля, по которым можно сортировать
+
+    # Переопределение метода get_queryset() для фильтрации по query_params
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        depart = self.request.query_params.get('depart')
+        if depart:
+            queryset = queryset.filter(depart__icontains=depart)
+        return queryset
+
+    # написание пользовательский действий, т.е. методов (которые не вписываются в стандартные операции CRUD),
+    # которые будут вызываться при заходе на определенный путь: /<pk>/my_action/
+    @action(detail=True, methods=['get'])
+    def my_action(self, request, pk=None):
+        # Ваша пользовательская логика здесь
+        return Response({'message': f'Пользовательская функция для пользователя с pk={pk}'})
