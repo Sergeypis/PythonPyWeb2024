@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-#x%01s7&6@_&duo#swv0u_#lp!&-t*g_-%cm6+$-$k0gze5a=!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
 
 
 # Application definition
@@ -104,6 +104,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        "TEST": {
+            #'DEPENDENCIES': ['devdb'],
+        },
     },
     'devdb': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -113,6 +116,11 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'OPTIONS': {'options': '-c search_path="Operations","Clients","Cars",Public'},
+        "TEST": {
+                    #"NAME": "mytestdatabase",
+                    "CHARSET": "utf8",  # Кодировка тестовой БД
+                    #'DEPENDENCIES': [],  # Установка зависимостей (Эта БД при тестах создастся первой)
+                },
     },
 }
 

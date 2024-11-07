@@ -1,18 +1,22 @@
 from apps.devdb2024.models import *
-import pysnooper
+# import pysnooper
 
 
 # ROUTED_MODELS = ["Route", "Driver", "VehicleType", "Vehicle", "Passenger", "Schedule", "Ticket", "Test"]
 class MyDBRouter(object):
     """
         A router to control all database operations on models in the
-        auth application.
+        "devdb2024" application.
     """
-    route_app_labels = {"devdb2024"}
+
+    # Apps for PostgreSQL DB (devdb)
+    route_app_labels = {
+        "devdb2024"
+    }
 
     def db_for_read(self, model, **hints):
         """
-        Attempts to read remote models go to remote database.
+        Attempts to read remote models go to "devdb" database.
         """
         if model._meta.app_label in self.route_app_labels:
             return "devdb"
@@ -20,29 +24,26 @@ class MyDBRouter(object):
 
     def db_for_write(self, model, **hints):
         """
-        Attempts to write remote models go to the remote database.
+        Attempts to write remote models go to the "devdb" database.
         """
         if model._meta.app_label in self.route_app_labels:
             return "devdb"
         return None
 
-    # def allow_relation(self, obj1, obj2, **hints):
-    #     """
-    #     Do not allow relations involving the remote database
-    #     """
-    #     if obj1._meta.app_label == 'remote' or \
-    #             obj2._meta.app_label == 'remote':
-    #         return False
-    #     return None
-    #
+    def allow_relation(self, obj1, obj2, **hints):
+        """
+        Allow relations involving the "devdb" database
+        """
+        if obj1._meta.app_label in self.route_app_labels or \
+                obj2._meta.app_label in self.route_app_labels:
+            return True
+        return None
+
     # @pysnooper.snoop()
     def allow_migrate(self, db, app_label, model_name=None, **hints):
-    #     """
-    #     Do not allow migrations on the remote database
-    #     """
-    #     if model._meta.app_label == 'remote':
-    #         return False
-
+        """
+        Allow migrations on the "devdb" database
+        """
         if app_label in self.route_app_labels:
             return db == "devdb"
         return None
@@ -51,10 +52,19 @@ class MyDBRouter(object):
 class AuthRouter(object):
     """
     A router to control all database operations on models in the
-    auth and contenttypes applications.
+    auth, contenttypes and other applications.
     """
-
-    route_app_labels = {"auth", "contenttypes"}
+    # Apps for SQLite3 DB (default)
+    route_app_labels = {
+        "auth",
+        "contenttypes",
+        "admin",
+        "sessions",
+        "app",
+        "api",
+        "db_train",
+        "db_train_alternative",
+    }
 
     def db_for_read(self, model, **hints):
         """

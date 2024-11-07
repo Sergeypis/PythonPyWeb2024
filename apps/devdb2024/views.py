@@ -278,7 +278,7 @@ class RouteGenericAPIView(GenericAPIView, CreateModelMixin, RetrieveModelMixin, 
             return Response({"message": "Object not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class RoutePagination(PageNumberPagination):
-    page_size = 5  # количество объектов на странице
+    page_size = 3  # количество объектов на странице
     page_size_query_param = 'page_size'  # параметр запроса для настройки количества объектов на странице
     max_page_size = 1000  # максимальное количество объектов на странице
 
@@ -286,7 +286,7 @@ class RouteViewSet(ModelViewSet):
     queryset = Route.objects.all()
     serializer_class = RouteModelSerializer
     http_method_names = ['get', 'post', 'put', 'patch', 'delete']  # Ограничение методов представления(по умолчанию все активны)
-    pagination_class = RoutePagination
+    #pagination_class = RoutePagination
 
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['depart', 'arrive']  # Указываем для каких полем можем проводить фильтрацию

@@ -1,0 +1,68 @@
+[
+{
+    "model": "devdb2024.route",
+    "pk": 4,
+    "fields": {
+        "depart": "Москва",
+        "arrive": "Воронеж",
+        "distance": 543,
+        "trip_time": "08:20",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 5,
+    "fields": {
+        "depart": "Воронеж",
+        "arrive": "Москва",
+        "distance": 543,
+        "trip_time": "08:40",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 6,
+    "fields": {
+        "depart": "Москва",
+        "arrive": "Мурманск",
+        "distance": 1513,
+        "trip_time": "1 day 12:58",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 7,
+    "fields": {
+        "depart": "Москва",
+        "arrive": "Пермь",
+        "distance": 1154,
+        "trip_time": "1 day 3:35",
+        "active": false
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 9,
+    "fields": {
+        "depart": "MSK",
+        "arrive": "SPb",
+        "distance": 860,
+        "trip_time": "10:00",
+        "active": true
+    }
+},
+{
+    "model": "devdb2024.route",
+    "pk": 10,
+    "fields": {
+        "depart": "Viborg",
+        "arrive": "Saint-Petersburg",
+        "distance": 120,
+        "trip_time": "01:30",
+        "active": true
+    }
+}
+]
