@@ -15,6 +15,7 @@ import json
 class MultiDbTestMixin:
     databases = {"default", "devdb"}
 
+
 class RouteViewSetTestCase(MultiDbTestMixin, APITestCase):
     fixtures = ['fixt_db_test.json']
 
